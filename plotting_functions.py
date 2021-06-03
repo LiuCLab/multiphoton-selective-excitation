@@ -10,7 +10,7 @@ Dependencies:
     matplotlib
 
 Author: Victor Han
-Last Modified: 6/2/21
+Last Modified: 6/3/21
 
 """
 
@@ -66,7 +66,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
     ax = plt.Subplot(fig, subsubplot[0:3])
     ax.plot(t, RF_mag*1e6)
     ax.set_xticks([])
-    ax.set_ylabel('|$B_{1xy}$| (uT)', rotation=0, labelpad=60)
+    ax.set_ylabel('|$B_{xy}$| (uT)', rotation=0, labelpad=60, y=0.3)
     ylimits = ax.get_ylim()
     rect = Rectangle( (zoom_time[0], ylimits[0]), zoom_time[1]-zoom_time[0], ylimits[1]-ylimits[0], linestyle='dashed', facecolor='none', edgecolor='red')
     ax.add_patch(rect)
@@ -77,7 +77,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
     ax.plot(t, RF_phase*180/np.pi)
     ax.set_xticks([])
     ax.set_ylim([-180,180])
-    ax.set_ylabel(r'$\angle B_{1xy}$ (deg)', rotation=0, labelpad=40)
+    ax.set_ylabel(r'$\angle B_{xy}$ (deg)', rotation=0, labelpad=40, y=0.3)
     ylimits = ax.get_ylim()
     rect = Rectangle( (zoom_time[0], ylimits[0]), zoom_time[1]-zoom_time[0], ylimits[1]-ylimits[0], linestyle='dashed', facecolor='none', edgecolor='red')
     ax.add_patch(rect)
@@ -88,7 +88,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
     ax.plot(t, B1z*1e3)
     ax.set_xticks([])
     ax.set_ylim([-0.3,0.3])
-    ax.set_ylabel('$B_{1z}$ (mT)', rotation=0, labelpad=35)
+    ax.set_ylabel('$B_{z}$ (mT)', rotation=0, labelpad=35, y=0.3)
     ylimits = ax.get_ylim()
     rect = Rectangle( (zoom_time[0], ylimits[0]), zoom_time[1]-zoom_time[0], ylimits[1]-ylimits[0], linestyle='dashed', facecolor='none', edgecolor='red')
     ax.add_patch(rect)
@@ -98,7 +98,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
     ax = plt.Subplot(fig, subsubplot[12:15])
     ax.plot(t, Gz*1e3)
     ax.set_ylim([-40,40])
-    ax.set_ylabel('$G_{z}$ (mT/m)', rotation=0, labelpad=50)
+    ax.set_ylabel('$G_{z}$ (mT/m)', rotation=0, labelpad=50, y=0.3)
     ax.set_xlabel('Time (ms)')
     ylimits = ax.get_ylim()
     rect = Rectangle( (zoom_time[0], ylimits[0]), zoom_time[1]-zoom_time[0], ylimits[1]-ylimits[0], linestyle='dashed', facecolor='none', edgecolor='red')
@@ -167,7 +167,7 @@ def plot_sim(fig, subplot, z, M_mag, M_phase):
     ax.plot(z*1e3, M_mag)
     ax.set_xticks([])
     ax.set_ylim([0,1])
-    ax.set_ylabel('|$M_{xy}$|', rotation=0, labelpad=25)
+    ax.set_ylabel('|$M_{xy}$|', rotation=0, labelpad=25, y=0.4)
     fig.add_subplot(ax)
 
     # Plot phase of xy magnitization vs position
@@ -175,7 +175,7 @@ def plot_sim(fig, subplot, z, M_mag, M_phase):
     ax.plot(z*1e3, M_phase*180/np.pi)
     ax.set_ylim([-180,180])
     ax.set_xlabel('Position (mm)')
-    ax.set_ylabel(r'$\angle M_{xy}$ (deg)', rotation=0, labelpad=30)
+    ax.set_ylabel(r'$\angle M_{xy}$ (deg)', rotation=0, labelpad=30, y=0.4)
     fig.add_subplot(ax)
 
 def plot_experiment(fig, subplot, image_data_filename, ylim=[0,40000]):
