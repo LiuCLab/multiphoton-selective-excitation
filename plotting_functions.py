@@ -10,7 +10,7 @@ Dependencies:
     matplotlib
 
 Author: Victor Han
-Last Modified: 6/3/21
+Last Modified: 12/24/21
 
 """
 
@@ -74,6 +74,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
 
     # Plot B1xy phase
     ax = plt.Subplot(fig, subsubplot[4:7])
+    ax.plot(t, np.zeros(np.shape(t)), color='black', linestyle='dashed', linewidth=1)
     ax.plot(t, RF_phase*180/np.pi)
     ax.set_xticks([])
     ax.set_ylim([-180,180])
@@ -85,6 +86,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
 
     # Plot B1z
     ax = plt.Subplot(fig, subsubplot[8:11])
+    ax.plot(t, np.zeros(np.shape(t)), color='black', linestyle='dashed', linewidth=1)
     ax.plot(t, B1z*1e3)
     ax.set_xticks([])
     ax.set_ylim([-0.3,0.3])
@@ -96,8 +98,9 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
 
     # Plot Gz
     ax = plt.Subplot(fig, subsubplot[12:15])
+    ax.plot(t, np.zeros(np.shape(t)), color='black', linestyle='dashed', linewidth=1)
     ax.plot(t, Gz*1e3)
-    ax.set_ylim([-40,40])
+    ax.set_ylim([-40,20])
     ax.set_ylabel('$G_{z}$ (mT/m)', rotation=0, labelpad=50, y=0.3)
     ax.set_xlabel('Time (ms)')
     ylimits = ax.get_ylim()
@@ -115,6 +118,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
 
 
     ax = plt.Subplot(fig, subsubplot[7])
+    ax.plot(t, np.zeros(np.shape(t)), color='black', linestyle='dashed', linewidth=1)
     ax.plot(t, RF_phase*180/np.pi)
     ax.set_xticks([])
     ax.set_yticks([])
@@ -123,6 +127,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
     fig.add_subplot(ax)
 
     ax = plt.Subplot(fig, subsubplot[11])
+    ax.plot(t, np.zeros(np.shape(t)), color='black', linestyle='dashed', linewidth=1)
     ax.plot(t, B1z*1e3)
     ax.set_xticks([])
     ax.set_yticks([])
@@ -131,9 +136,10 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
     fig.add_subplot(ax)
 
     ax = plt.Subplot(fig, subsubplot[15])
+    ax.plot(t, np.zeros(np.shape(t)), color='black', linestyle='dashed', linewidth=1)
     ax.plot(t, Gz*1e3)
     ax.set_yticks([])
-    ax.set_ylim([-40,40])
+    ax.set_ylim([-40,20])
     ax.set_xlim(zoom_time)
     ax.set_xlabel('Close-up (ms)')
     fig.add_subplot(ax)

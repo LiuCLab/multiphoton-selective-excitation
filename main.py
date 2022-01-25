@@ -10,7 +10,7 @@ Dependencies:
     matplotlib
 
 Author: Victor Han
-Last Modified: 6/2/21
+Last Modified: 12/30/21
 
 """
 
@@ -26,6 +26,7 @@ import matplotlib.pyplot as plt
 from scipy.special import *
 from scipy.integrate import odeint
 import matplotlib.gridspec as gridspec
+from matplotlib.transforms import Bbox
 import csv
 
 from various_constants import *
@@ -36,14 +37,14 @@ from plotting_functions import *
 
 
 #################################################################
-# Make Figure 2: equivalent single-photon, two-photon, and freq mod slice select
+# Make Figure 2: equivalent one-photon, two-photon, and freq mod slice select
 
 # Make a grid of subplots and label the rows and columns
 fig = plt.figure(figsize=(20, 10))
 cols = 2+SEQUENCE_PLOT_END # Number of columns used for pulse sequence plot
 outer = gridspec.GridSpec(4, cols, wspace=1, hspace=0.3)
 ax = plt.Subplot(fig, outer[cols])
-t = ax.text(0.7,0.2, 'Single-Photon', fontsize=CATEGORY_SIZE, rotation=90)
+t = ax.text(0.7,0.2, 'One-Photon', fontsize=CATEGORY_SIZE, rotation=90)
 t.set_ha('center')
 ax.axis("off")
 fig.add_subplot(ax)
@@ -75,7 +76,7 @@ ax.axis("off")
 fig.add_subplot(ax)
 
 
-# 2a) Make single photon version
+# 2a) Make one photon version
 pulse = slr_pulse(N, TB, FA, name='2a')
 bz_pulse = np.zeros(N)
 gz_pulse = np.zeros(N)
@@ -170,7 +171,7 @@ for i in range(XRES):
 plot_sim(fig, outer[3*cols+SEQUENCE_PLOT_END], x_vals, np.abs(final_m), -1*np.angle(final_m))
 plot_experiment(fig, outer[3*cols+SEQUENCE_PLOT_END+1], '2c.npy')
 
-plt.savefig("figure2.pdf")
+plt.savefig("figure2.pdf", bbox_inches=Bbox([[3.1, 0.5], [18.6, 7.5]]))
 
 
 
@@ -187,7 +188,7 @@ t.set_ha('center')
 ax.axis("off")
 fig.add_subplot(ax)
 ax = plt.Subplot(fig, outer[2*cols])
-t = ax.text(0.7,0.2, r'Constant $B_{1z}$', fontsize=CATEGORY_SIZE, rotation=90)
+t = ax.text(0.7,0.2, r'Constant $B_{z}$', fontsize=CATEGORY_SIZE, rotation=90)
 t.set_ha('center')
 ax.axis("off")
 fig.add_subplot(ax)
@@ -311,7 +312,7 @@ for i in range(XRES):
 plot_sim(fig, outer[3*cols+SEQUENCE_PLOT_END], x_vals, np.abs(final_m), -1*np.angle(final_m))
 plot_experiment(fig, outer[3*cols+SEQUENCE_PLOT_END+1], '3c.npy')
 
-plt.savefig("figure3.pdf")
+plt.savefig("figure3.pdf", bbox_inches=Bbox([[3.1, 0.5], [18.6, 7.5]]))
 
 
 
@@ -479,7 +480,7 @@ for i in range(XRES):
 plot_sim(fig, outer[3*cols+SEQUENCE_PLOT_END], x_vals, np.abs(final_m), -1*np.angle(final_m))
 plot_experiment(fig, outer[3*cols+SEQUENCE_PLOT_END+1], '4c.npy')
 
-plt.savefig("figure4.pdf")
+plt.savefig("figure4.pdf", bbox_inches=Bbox([[3.1, 0.5], [18.6, 7.5]]))
 
 
 
@@ -627,7 +628,7 @@ for i in range(XRES):
 plot_sim(fig, outer[3*cols+SEQUENCE_PLOT_END], x_vals, np.abs(final_m), -1*np.angle(final_m))
 plot_experiment(fig, outer[3*cols+SEQUENCE_PLOT_END+1], '5c.npy', ylim=[0,10000]) # Max y-value is decreased because higher receiver attenuation was used to not saturate the receiver
 
-plt.savefig("figure5.pdf")
+plt.savefig("figure5.pdf", bbox_inches=Bbox([[3.1, 0.5], [18.6, 7.5]]))
 
 
 plt.show()
