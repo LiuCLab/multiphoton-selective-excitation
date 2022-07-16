@@ -10,7 +10,7 @@ Dependencies:
     matplotlib
 
 Author: Victor Han
-Last Modified: 6/2/21
+Last Modified: 7/7/22
 
 """
 
@@ -32,7 +32,7 @@ RF_LIMIT = 14.7e-6
 # Maximum gradient strength in T/m
 GRAD_LIMIT = 3.2934e-2 
 # Maximum gradient slew rate in T/m/s
-SLEW_LIMIT = 119.064  
+SLEW_LIMIT = 119.064/2  
 
 
 #############################
@@ -41,25 +41,41 @@ SLEW_LIMIT = 119.064
 # Flip angle in degrees
 FA = 30
 # Time-bandwidth product of pulse
-TB = 3
+TB = 6
 # Time-bandwidth product of pulse for figure 4
-TB_FIG4 = 3
+TB_FIG4 = 6
+# Time-bandwidth product of pulse for figure 5
+TB_FIG5 = 6
+# Time-bandwidth product of pulse for figure 6
+TB_FIG6 = 6
 # Duration of pulse in seconds
-PULSE_DURATION = 0.003
+PULSE_DURATION = 0.006
 # Duration of pulses in figure 4 in seconds
-PULSE_DURATION_FIG4 = 0.012
+PULSE_DURATION_FIG4 = 0.024
+# Duration of pulses in figure 5 in seconds
+PULSE_DURATION_FIG5 = 0.012
+# Duration of pulses in figure 6 in seconds
+PULSE_DURATION_FIG6 = 0.012
 # Number of points in pulse
 N = int(PULSE_DURATION*500*1000) # 2us per point
 # Number of points in pulse
 N_FIG4 = int(PULSE_DURATION_FIG4*500*1000) # 2us per point
+# Number of points in pulse
+N_FIG5 = int(PULSE_DURATION_FIG5*500*1000) # 2us per point
+# Number of points in pulse
+N_FIG6 = int(PULSE_DURATION_FIG6*500*1000) # 2us per point
 # Slice thickness in m
 THICKNESS = 0.005
 # Slice select gradient value based on pulse parameters
 SLICE_PEAK = TB/PULSE_DURATION * 2*np.pi/g * 1/THICKNESS
 # Slice select gradient value based on pulse parameters
 SLICE_PEAK_FIG4 = TB_FIG4/PULSE_DURATION_FIG4 * 2*np.pi/g * 1/THICKNESS
+# Slice select gradient value based on pulse parameters
+SLICE_PEAK_FIG5 = TB_FIG5/PULSE_DURATION_FIG5 * 2*np.pi/g * 1/THICKNESS
+# Slice select gradient value based on pulse parameters
+SLICE_PEAK_FIG6 = TB_FIG6/PULSE_DURATION_FIG6 * 2*np.pi/g * 1/THICKNESS
 # Amplitude of uniform B1z
-B1Z_AMP = 0.2e-3
+B1Z_AMP = 0.17e-3
 # Frequency of uniform B1z
 FZ = 25e3
 
@@ -68,9 +84,13 @@ FZ = 25e3
 # Simulation constants
 
 # Number of spatial points for slice selective simulations
-XRES = 101
+XRES = 301
 # Limit on spatial position for simulations. Simulations go from -xlim to xlim
 XLIM = 20e-3
+# Limit on spatial position for simulations. Simulations go from -xlim to xlim
+XLIM_FIG5 = 40e-3
+# Limit on spatial position for simulations. Simulations go from -xlim to xlim
+XLIM_FIG6 = 40e-3
 
 
 #############################
@@ -92,8 +112,8 @@ CATEGORY_SIZE = 14
 # Other constants
 
 # Whether or not waveform files are written out for experimental use
-WRITE_WAVEFORM_FILES = False
+WRITE_WAVEFORM_FILES = True
 # Whether or not to print max waveform values (helpful for experimental implementation)
-PRINT_MAX_VALS = False
+PRINT_MAX_VALS = True
 # Time between points
 DT = 2e-6

@@ -10,7 +10,7 @@ Dependencies:
     matplotlib
 
 Author: Victor Han
-Last Modified: 6/2/21
+Last Modified: 7/1/22
 
 """
 
@@ -54,7 +54,7 @@ def write_rf_pulse_for_heartvista(pulse, filename):
     f.close()
 
 
-def write_gz_pulse_for_heartvista(gz_pulse, slice_peak, pulse_duration, filename):
+def write_gz_pulse_for_heartvista(gz_pulse, slice_peak, pulse_duration, filename, area_offset=0):
     """Saves a gradient pulse for use with HeartVista.
 
     Args:
@@ -66,7 +66,7 @@ def write_gz_pulse_for_heartvista(gz_pulse, slice_peak, pulse_duration, filename
 
     t1 = 0
     gz_to_save = []
-    while (gz_waveform(t1, slice_peak, pulse_duration, gz_pulse) != 0) or (t1 < pulse_duration+4*slice_peak/SLEW_LIMIT):
+    while (gz_waveform(t1, slice_peak, pulse_duration, gz_pulse, area_offset=area_offset) != 0) or (t1 < pulse_duration+4*slice_peak/SLEW_LIMIT):
         gz_to_save.append(gz_waveform(t1, slice_peak, pulse_duration, gz_pulse))
         t1 = t1 + 2e-6
     scaling_factor=2**15-1
@@ -78,7 +78,7 @@ def write_gz_pulse_for_heartvista(gz_pulse, slice_peak, pulse_duration, filename
     f.close()
 
 
-def slr_pulse(N, tb, FA, freq=0, phase=0, d1=0.001, d2=0.001, ptype='ex', ftype='ls', name='slr'):
+def slr_pulse(N, tb, FA, freq=0, phase=0, d1=0.001, d2=0.001, ptype='st', ftype='ls', name='slr'):
     """Generates a SLR RF pulse for use with simulations and HeartVista.
 
     Args:
@@ -98,6 +98,7 @@ def slr_pulse(N, tb, FA, freq=0, phase=0, d1=0.001, d2=0.001, ptype='ex', ftype=
 
     # Generate SLR pulse with sigpy
     pulse = rf.slr.dzrf(N, tb, ptype, ftype, d1, d2, False)
+    pulse = pulse.astype(complex)
 
     # Scale the pulse to have the given flip angle
     pulse = pulse / np.max(np.abs(pulse))
@@ -117,7 +118,7 @@ def slr_pulse(N, tb, FA, freq=0, phase=0, d1=0.001, d2=0.001, ptype='ex', ftype=
 
     return pulse
 
-def fm_pulse(N, tb, FA, freq, B1z, phase=0, d1=0.001, d2=0.001, ptype='ex', ftype='ls', name='slr_fm'):
+def fm_pulse(N, tb, FA, freq, B1z, phase=0, d1=0.001, d2=0.001, ptype='st', ftype='ls', name='slr_fm'):
     """Generates a frequency modulated SLR RF pulse for use with simulations and HeartVista.
     The frequency modulation simulates the effect of a B1z hard pulse with a certain frequency and amplitude.
     It is assumed that only a sideband of the pulse, corresponding to a two-photon pulse, will be used for excitation.
@@ -140,6 +141,7 @@ def fm_pulse(N, tb, FA, freq, B1z, phase=0, d1=0.001, d2=0.001, ptype='ex', ftyp
 
     # Generate SLR pulse with sigpy
     pulse = rf.slr.dzrf(N, tb, ptype, ftype, d1, d2, False)
+    pulse = pulse.astype(complex)
 
     # Scale the pulse to have the given flip angle
     pulse = pulse / np.max(np.abs(pulse))
@@ -151,7 +153,7 @@ def fm_pulse(N, tb, FA, freq, B1z, phase=0, d1=0.001, d2=0.001, ptype='ex', ftyp
 
     for i in range(N):
         # Do a frequency modulation
-        pulse[i] = np.complex(np.real(pulse[i]) * np.cos(gBz_w-1*gBz_w*np.cos(i/N*pulse_duration*2*np.pi*freq)), np.real(pulse[i]) * np.sin(gBz_w-1*gBz_w*np.cos(i/N*pulse_duration*2*np.pi*freq)))
+        pulse[i] = pulse[i] * np.complex(np.cos(gBz_w-1*gBz_w*np.cos(i/N*pulse_duration*2*np.pi*freq)), np.sin(gBz_w-1*gBz_w*np.cos(i/N*pulse_duration*2*np.pi*freq)))
         # Shift the pulse in frequency
         pulse[i] = pulse[i] * np.complex(np.cos(DT*i*2*np.pi*freq), np.sin(DT*i*2*np.pi*freq))
     # Scale the pulse to compensate for lowered sideband efficiency

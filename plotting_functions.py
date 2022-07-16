@@ -10,7 +10,7 @@ Dependencies:
     matplotlib
 
 Author: Victor Han
-Last Modified: 12/24/21
+Last Modified: 7/1/22
 
 """
 
@@ -34,7 +34,7 @@ from matplotlib.patches import Rectangle
 from various_constants import *
 
 
-def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.1]):
+def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.1], RF_lim=[0,3.5]):
     """Plots pulse sequence waveforms in a subplot for the slice selective excitation.
 
     Args:
@@ -46,6 +46,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
         B1z: B1z to plot
         Gz: Slice selective gradient to plot
         zoom_time: Time period in ms to make a zoomed-in view of
+        RF_lim: The plot limits for the RF pulse
     """
 
     t = t * 1000 # Change units to ms
@@ -67,6 +68,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
     ax.plot(t, RF_mag*1e6)
     ax.set_xticks([])
     ax.set_ylabel('|$B_{xy}$| (uT)', rotation=0, labelpad=60, y=0.3)
+    ax.set_ylim(RF_lim)
     ylimits = ax.get_ylim()
     rect = Rectangle( (zoom_time[0], ylimits[0]), zoom_time[1]-zoom_time[0], ylimits[1]-ylimits[0], linestyle='dashed', facecolor='none', edgecolor='red')
     ax.add_patch(rect)
@@ -113,6 +115,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
     ax.plot(t, RF_mag*1e6)
     ax.set_xticks([])
     ax.set_yticks([])
+    ax.set_ylim(RF_lim)
     ax.set_xlim(zoom_time)
     fig.add_subplot(ax)
 
@@ -184,13 +187,14 @@ def plot_sim(fig, subplot, z, M_mag, M_phase):
     ax.set_ylabel(r'$\angle M_{xy}$ (deg)', rotation=0, labelpad=30, y=0.4)
     fig.add_subplot(ax)
 
-def plot_experiment(fig, subplot, image_data_filename, ylim=[0,40000]):
+def plot_experiment(fig, subplot, image_data_filename, xlim=XLIM, ylim=[0,40000]):
     """Plots experimental results in a subplot for the slice selective excitation.
 
     Args:
         fig: The figure to plot on
         subplot: The subplot of the figure to plot on
-        image_name: Name of image file
+        image_data_filename: Name of image file
+        xlim: Limits on the x-axis to crop the figure to
         ylim: Limits on y-axis of line plot of experimental data. Arbitrary units.
     """
 
@@ -208,9 +212,9 @@ def plot_experiment(fig, subplot, image_data_filename, ylim=[0,40000]):
     inner = gridspec.GridSpecFromSubplotSpec(5, 4, subplot_spec=subplot, wspace=0, hspace=0)
 
     im = np.load(image_data_filename)
-    image_fov = 0.22
+    image_fov = 0.192
     image_n = 512
-    image_n_to_keep = int(np.round(XLIM*2/image_fov * image_n))
+    image_n_to_keep = int(np.round(xlim*2/image_fov * image_n))
     if image_n_to_keep % 2 == 1:
         image_n_to_keep = image_n_to_keep + 1 # Want to make it an even number
     image_start = int((image_n - image_n_to_keep) / 2)
