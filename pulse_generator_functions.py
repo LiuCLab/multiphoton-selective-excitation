@@ -10,7 +10,7 @@ Dependencies:
     matplotlib
 
 Author: Victor Han
-Last Modified: 7/1/22
+Last Modified: 10/27/22
 
 """
 
@@ -67,7 +67,7 @@ def write_gz_pulse_for_heartvista(gz_pulse, slice_peak, pulse_duration, filename
     t1 = 0
     gz_to_save = []
     while (gz_waveform(t1, slice_peak, pulse_duration, gz_pulse, area_offset=area_offset) != 0) or (t1 < pulse_duration+4*slice_peak/SLEW_LIMIT):
-        gz_to_save.append(gz_waveform(t1, slice_peak, pulse_duration, gz_pulse))
+        gz_to_save.append(gz_waveform(t1, slice_peak, pulse_duration, gz_pulse, area_offset=area_offset))
         t1 = t1 + 2e-6
     scaling_factor=2**15-1
     rescaled=np.real(gz_to_save)*scaling_factor/np.max(np.abs(gz_to_save))
