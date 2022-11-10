@@ -112,7 +112,7 @@ CATEGORY_SIZE = 14
 # Other constants
 
 # Whether or not waveform files are written out for experimental use
-WRITE_WAVEFORM_FILES = True
+WRITE_WAVEFORM_FILES = False
 # Whether or not to print max waveform values (helpful for experimental implementation)
 PRINT_MAX_VALS = True
 # Time between points

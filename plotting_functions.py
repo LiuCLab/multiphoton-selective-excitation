@@ -10,7 +10,7 @@ Dependencies:
     matplotlib
 
 Author: Victor Han
-Last Modified: 7/1/22
+Last Modified: 11/5/22
 
 """
 
@@ -34,7 +34,7 @@ from matplotlib.patches import Rectangle
 from various_constants import *
 
 
-def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.1], RF_lim=[0,3.5]):
+def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.1], RF_lim=[0,3.5], B1z_lim=[-0.3,0.3]):
     """Plots pulse sequence waveforms in a subplot for the slice selective excitation.
 
     Args:
@@ -91,7 +91,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
     ax.plot(t, np.zeros(np.shape(t)), color='black', linestyle='dashed', linewidth=1)
     ax.plot(t, B1z*1e3)
     ax.set_xticks([])
-    ax.set_ylim([-0.3,0.3])
+    ax.set_ylim(B1z_lim)
     ax.set_ylabel('$B_{z}$ (mT)', rotation=0, labelpad=35, y=0.3)
     ylimits = ax.get_ylim()
     rect = Rectangle( (zoom_time[0], ylimits[0]), zoom_time[1]-zoom_time[0], ylimits[1]-ylimits[0], linestyle='dashed', facecolor='none', edgecolor='red')
@@ -134,7 +134,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
     ax.plot(t, B1z*1e3)
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_ylim([-0.3,0.3])
+    ax.set_ylim(B1z_lim)
     ax.set_xlim(zoom_time)
     fig.add_subplot(ax)
 
@@ -148,7 +148,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
     fig.add_subplot(ax)
 
 
-def plot_sim(fig, subplot, z, M_mag, M_phase):
+def plot_sim(fig, subplot, z, M_mag, M_phase, M_mag_lim=[0,1]):
     """Plots simulation results in a subplot for the slice selective excitation.
 
     Args:
@@ -175,7 +175,7 @@ def plot_sim(fig, subplot, z, M_mag, M_phase):
     ax = plt.Subplot(fig, inner[0])
     ax.plot(z*1e3, M_mag)
     ax.set_xticks([])
-    ax.set_ylim([0,1])
+    ax.set_ylim(M_mag_lim)
     ax.set_ylabel('|$M_{xy}$|', rotation=0, labelpad=25, y=0.4)
     fig.add_subplot(ax)
 

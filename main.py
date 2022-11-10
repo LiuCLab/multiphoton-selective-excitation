@@ -96,6 +96,7 @@ if PRINT_MAX_VALS:
     print('2a max B1xy: ' + str(np.max(np.abs(pulse))))
     print('2a max gz: ' + str(np.max(np.abs(Gz))))
     print('2a time to RF start: ' + str(SLICE_PEAK/SLEW_LIMIT))
+    print('2a B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 # Now to save the gz waveform
 if WRITE_WAVEFORM_FILES:
@@ -131,6 +132,7 @@ for i in range(len(t)):
 plot_waveform(fig, outer[2*cols+1:2*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[2.9, 3.1], RF_lim=[0,16])
 if PRINT_MAX_VALS:
     print('2b max B1xy: ' + str(np.max(np.abs(pulse))))
+    print('2b B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 M = np.array([0, 0, M0])
 t = np.linspace(0, sim_duration, 101)
@@ -163,6 +165,7 @@ for i in range(len(t)):
 plot_waveform(fig, outer[3*cols+1:3*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[2.9, 3.1], RF_lim=[0,16])
 if PRINT_MAX_VALS:
     print('2c max B1xy: ' + str(np.max(np.abs(pulse))))
+    print('2c B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 M = np.array([0, 0, M0])
 t = np.linspace(0, sim_duration, 101)
@@ -240,6 +243,7 @@ for i in range(len(t)):
 plot_waveform(fig, outer[cols+1:cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[2.9, 3.1], RF_lim=[0,16])
 if PRINT_MAX_VALS:
     print('3a max B1xy: ' + str(np.max(np.abs(pulse))))
+    print('3a B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 M = np.array([0, 0, M0])
 t = np.linspace(0, sim_duration, 101)
@@ -272,6 +276,7 @@ plot_waveform(fig, outer[2*cols+1:2*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.a
 if PRINT_MAX_VALS:
     print('3b max B1xy: ' + str(np.max(np.abs(pulse))))
     print('3b rise-time: ' + str(SLICE_PEAK/SLEW_LIMIT))
+    print('3b B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 if WRITE_WAVEFORM_FILES:
     make_b1z_csv(bz_pulse, SLICE_PEAK, PULSE_DURATION, '3b.csv', dc_value=-2*np.pi*f_offset/g)
 
@@ -304,6 +309,7 @@ for i in range(len(t)):
 plot_waveform(fig, outer[3*cols+1:3*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[2.9, 3.1], RF_lim=[0,16])
 if PRINT_MAX_VALS:
     print('3c max B1xy: ' + str(np.max(np.abs(pulse))))
+    print('3c B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 M = np.array([0, 0, M0])
 t = np.linspace(0, sim_duration, 101)
@@ -385,6 +391,7 @@ if PRINT_MAX_VALS:
     print('4a max B1xy: ' + str(np.max(np.abs(pulse))))
     print('4a max gz: ' + str(np.max(np.abs(Gz))))
     print('4a time to RF start: ' + str(SLICE_PEAK_FIG4/SLEW_LIMIT))
+    print('4a B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 # Now to save the gz waveform
 if WRITE_WAVEFORM_FILES:
@@ -440,6 +447,7 @@ for i in range(len(t)):
 plot_waveform(fig, outer[2*cols+1:2*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[11.9, 12.1], RF_lim=[0,4])
 if PRINT_MAX_VALS:
     print('4b max B1xy: ' + str(np.max(np.abs(pulse))))
+    print('4b B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 M = np.array([0, 0, M0])
 t = np.linspace(0, sim_duration_fig4, 101)
@@ -479,6 +487,7 @@ for i in range(len(t)):
 plot_waveform(fig, outer[3*cols+1:3*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[11.9, 12.1], RF_lim=[0,4])
 if PRINT_MAX_VALS:
     print('4c max B1xy: ' + str(np.max(np.abs(pulse))))
+    print('4c B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 M = np.array([0, 0, M0])
 t = np.linspace(0, sim_duration_fig4, 101)
@@ -563,6 +572,7 @@ if PRINT_MAX_VALS:
     print('5a max B1xy: ' + str(np.max(np.abs(pulse))))
     print('5a max gz: ' + str(np.max(np.abs(Gz))))
     print('5a time to RF start: ' + str(SLICE_PEAK_FIG5/SLEW_LIMIT))
+    print('5a B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 M = np.array([0, 0, M0])
 t = np.linspace(0, sim_duration, 101)
@@ -594,6 +604,7 @@ for i in range(len(t)):
 plot_waveform(fig, outer[2*cols+1:2*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[5.5, 6.5], RF_lim=[0,1.5])
 if PRINT_MAX_VALS:
     print('5b max B1xy: ' + str(np.max(np.abs(pulse))))
+    print('5b B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 M = np.array([0, 0, M0])
 t = np.linspace(0, sim_duration, 101)
@@ -627,6 +638,7 @@ for i in range(len(t)):
 plot_waveform(fig, outer[3*cols+1:3*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[5.5, 6.5], RF_lim=[0,1.5])
 if PRINT_MAX_VALS:
     print('5c max B1xy: ' + str(np.max(np.abs(pulse))))
+    print('5c B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 M = np.array([0, 0, M0])
 t = np.linspace(0, sim_duration, 101)
@@ -723,6 +735,7 @@ if PRINT_MAX_VALS:
     print('6a max B1xy: ' + str(np.max(np.abs(pulse))))
     print('6a max gz: ' + str(np.max(np.abs(Gz))))
     print('6a time to RF start: ' + str(SLICE_PEAK_FIG6/SLEW_LIMIT))
+    print('6a B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 M = np.array([0, 0, M0])
 t = np.linspace(0, sim_duration, 101)
@@ -756,6 +769,7 @@ for i in range(len(t)):
 plot_waveform(fig, outer[2*cols+1:2*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[5.5, 6.5], RF_lim=[0,3.5])
 if PRINT_MAX_VALS:
     print('6b max B1xy: ' + str(np.max(np.abs(pulse))))
+    print('6b B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 M = np.array([0, 0, M0])
 t = np.linspace(0, sim_duration, 101)
@@ -788,6 +802,7 @@ for i in range(len(t)):
 plot_waveform(fig, outer[3*cols+1:3*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[5.5, 6.5], RF_lim=[0,3.5])
 if PRINT_MAX_VALS:
     print('6c max B1xy: ' + str(np.max(np.abs(pulse))))
+    print('6c B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 M = np.array([0, 0, M0])
 t = np.linspace(0, sim_duration, 101)
@@ -830,7 +845,7 @@ for i in range(len(t)):
 plot_waveform(fig, outer[4*cols+1:4*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[5.5, 6.5], RF_lim=[0,3.5])
 if PRINT_MAX_VALS:
     print('6d max B1xy: ' + str(np.max(np.abs(pulse))))
-    print('6d B1xy^2 summed:' + str(np.sum(np.power(abs(pulse),2))))
+    print('6d B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 M = np.array([0, 0, M0])
 t = np.linspace(0, sim_duration, 101)
@@ -868,7 +883,7 @@ for i in range(len(t)):
 plot_waveform(fig, outer[5*cols+1:5*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[5.5, 6.5], RF_lim=[0,3.5])
 if PRINT_MAX_VALS:
     print('6e max B1xy: ' + str(np.max(np.abs(pulse))))
-    print('6e B1xy^2 summed:' + str(np.sum(np.power(abs(pulse),2))))
+    print('6e B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
 M = np.array([0, 0, M0])
 t = np.linspace(0, sim_duration, 101)

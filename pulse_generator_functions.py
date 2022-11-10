@@ -78,7 +78,7 @@ def write_gz_pulse_for_heartvista(gz_pulse, slice_peak, pulse_duration, filename
     f.close()
 
 
-def slr_pulse(N, tb, FA, freq=0, phase=0, d1=0.001, d2=0.001, ptype='st', ftype='ls', name='slr'):
+def slr_pulse(N, tb, FA, freq=0, phase=0, d1=0.001, d2=0.001, ptype='st', ftype='ls', name='slr', DT=DT):
     """Generates a SLR RF pulse for use with simulations and HeartVista.
 
     Args:
@@ -118,7 +118,7 @@ def slr_pulse(N, tb, FA, freq=0, phase=0, d1=0.001, d2=0.001, ptype='st', ftype=
 
     return pulse
 
-def fm_pulse(N, tb, FA, freq, B1z, phase=0, d1=0.001, d2=0.001, ptype='st', ftype='ls', name='slr_fm'):
+def fm_pulse(N, tb, FA, freq, B1z, phase=0, d1=0.001, d2=0.001, ptype='st', ftype='ls', name='slr_fm', DT=DT):
     """Generates a frequency modulated SLR RF pulse for use with simulations and HeartVista.
     The frequency modulation simulates the effect of a B1z hard pulse with a certain frequency and amplitude.
     It is assumed that only a sideband of the pulse, corresponding to a two-photon pulse, will be used for excitation.
