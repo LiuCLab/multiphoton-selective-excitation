@@ -10,7 +10,7 @@ Dependencies:
     matplotlib
 
 Author: Victor Han
-Last Modified: 11/05/22
+Last Modified: 11/15/22
 
 """
 
@@ -72,6 +72,7 @@ fig.add_subplot(ax)
 
 # Make the pulse duration short, but not so short that we exceed max B1xy limits
 PULSE_DURATION = 0.0014
+SLICE_PEAK = TB/PULSE_DURATION * 2*np.pi/g * 1/THICKNESS # Change gradient strength based on pulse duration
 
 # Increase the sampling rate because without it, the frequency modulation pulse is not accurate
 DT = 0.5e-6
@@ -82,7 +83,7 @@ B1Z_AMP = 1.84118378*FZ*2*np.pi/g
 pulse = slr_pulse(N, TB, FA, name='s2', DT=DT)
 bz_pulse = np.zeros(N)
 gz_pulse = np.zeros(N)
-sim_duration = PULSE_DURATION*2
+sim_duration = PULSE_DURATION*2.5
 
 t = np.linspace(0,sim_duration,WAVEFORM_RES)
 RF = np.zeros(len(t), dtype=complex)
@@ -93,7 +94,7 @@ for i in range(len(t)):
     B1z[i] = bz_waveform(t[i], SLICE_PEAK, PULSE_DURATION, np.zeros(N))
     Gz[i] = gz_waveform(t[i], SLICE_PEAK, PULSE_DURATION, gz_pulse)
 
-plot_waveform(fig, outer[cols+1:cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[0.7, 0.9], RF_lim=[0,15], B1z_lim=[-1.5,1.5])
+plot_waveform(fig, outer[cols+1:cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[0.9, 1.1], RF_lim=[0,15], B1z_lim=[-1.5,1.5])
 if PRINT_MAX_VALS:
     print('s2a B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
@@ -123,7 +124,7 @@ for i in range(len(t)):
     B1z[i] = bz_waveform(t[i], SLICE_PEAK, PULSE_DURATION, bz_pulse)
     Gz[i] = gz_waveform(t[i], SLICE_PEAK, PULSE_DURATION, gz_pulse)
 
-plot_waveform(fig, outer[2*cols+1:2*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[0.7, 0.9], RF_lim=[0,15], B1z_lim=[-1.5,1.5])
+plot_waveform(fig, outer[2*cols+1:2*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[0.9, 1.1], RF_lim=[0,15], B1z_lim=[-1.5,1.5])
 if PRINT_MAX_VALS:
     print('s2b B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
@@ -154,7 +155,7 @@ for i in range(len(t)):
     B1z[i] = bz_waveform(t[i], SLICE_PEAK, PULSE_DURATION, bz_pulse)
     Gz[i] = gz_waveform(t[i], SLICE_PEAK, PULSE_DURATION, gz_pulse)
 
-plot_waveform(fig, outer[3*cols+1:3*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[0.7, 0.9], RF_lim=[0,15], B1z_lim=[-1.5,1.5])
+plot_waveform(fig, outer[3*cols+1:3*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[0.9, 1.1], RF_lim=[0,15], B1z_lim=[-1.5,1.5])
 if PRINT_MAX_VALS:
     print('s2c B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
