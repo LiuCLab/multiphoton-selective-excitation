@@ -94,7 +94,7 @@ for i in range(len(t)):
     B1z[i] = bz_waveform(t[i], SLICE_PEAK, PULSE_DURATION, np.zeros(N))
     Gz[i] = gz_waveform(t[i], SLICE_PEAK, PULSE_DURATION, gz_pulse)
 
-plot_waveform(fig, outer[cols+1:cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[0.9, 1.1], RF_lim=[0,15], B1z_lim=[-1.5,1.5])
+plot_waveform(fig, outer[cols+1:cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[0.9, 1.1], RF_lim=[0,15], B1z_lim=[-1.5,1.5], Gz_lim=[-40,30])
 if PRINT_MAX_VALS:
     print('s2a B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
@@ -124,7 +124,7 @@ for i in range(len(t)):
     B1z[i] = bz_waveform(t[i], SLICE_PEAK, PULSE_DURATION, bz_pulse)
     Gz[i] = gz_waveform(t[i], SLICE_PEAK, PULSE_DURATION, gz_pulse)
 
-plot_waveform(fig, outer[2*cols+1:2*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[0.9, 1.1], RF_lim=[0,15], B1z_lim=[-1.5,1.5])
+plot_waveform(fig, outer[2*cols+1:2*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[0.9, 1.1], RF_lim=[0,15], B1z_lim=[-1.5,1.5], Gz_lim=[-40,30])
 if PRINT_MAX_VALS:
     print('s2b B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 
@@ -155,7 +155,7 @@ for i in range(len(t)):
     B1z[i] = bz_waveform(t[i], SLICE_PEAK, PULSE_DURATION, bz_pulse)
     Gz[i] = gz_waveform(t[i], SLICE_PEAK, PULSE_DURATION, gz_pulse)
 
-plot_waveform(fig, outer[3*cols+1:3*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[0.9, 1.1], RF_lim=[0,15], B1z_lim=[-1.5,1.5])
+plot_waveform(fig, outer[3*cols+1:3*cols+SEQUENCE_PLOT_END], t, np.abs(RF), np.angle(RF), B1z, Gz, zoom_time=[0.9, 1.1], RF_lim=[0,15], B1z_lim=[-1.5,1.5], Gz_lim=[-40,30])
 if PRINT_MAX_VALS:
     print('s2c B1xy^2 integral:' + str(np.trapz(np.power(abs(pulse),2), dx=DT)))
 

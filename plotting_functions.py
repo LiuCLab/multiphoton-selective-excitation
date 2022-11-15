@@ -34,7 +34,7 @@ from matplotlib.patches import Rectangle
 from various_constants import *
 
 
-def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.1], RF_lim=[0,3.5], B1z_lim=[-0.3,0.3]):
+def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.1], RF_lim=[0,3.5], B1z_lim=[-0.3,0.3], Gz_lim=[-40,20]):
     """Plots pulse sequence waveforms in a subplot for the slice selective excitation.
 
     Args:
@@ -102,7 +102,7 @@ def plot_waveform(fig, subplot, t, RF_mag, RF_phase, B1z, Gz, zoom_time=[2.9, 3.
     ax = plt.Subplot(fig, subsubplot[12:15])
     ax.plot(t, np.zeros(np.shape(t)), color='black', linestyle='dashed', linewidth=1)
     ax.plot(t, Gz*1e3)
-    ax.set_ylim([-40,20])
+    ax.set_ylim(Gz_lim)
     ax.set_ylabel('$G_{z}$ (mT/m)', rotation=0, labelpad=50, y=0.3)
     ax.set_xlabel('Time (ms)')
     ylimits = ax.get_ylim()
